@@ -50,7 +50,7 @@ def get_pdf():
     Dict = {title: column for (title, column) in col}
     df = pd.DataFrame(Dict)
     df.head()
-    rslt_df = df.loc[(df['Section'] == 32) | (df['Section'] == 36)]
+    rslt_df = df.loc[(df['Section'] == 32) | (df['Section'] == 86)]
 
     return [url for url in rslt_df['Référence GALAXIE']]
 
