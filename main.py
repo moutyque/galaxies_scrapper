@@ -7,7 +7,7 @@ from os.path import exists
 import smtplib
 from email.message import EmailMessage
 
-
+headers = ["Section","Section2","Section3"]
 def get_pdf():
     resp = requests.get(
         "https://www.galaxie.enseignementsup-recherche.gouv.fr/ensup/ListesPostesPublies/Emplois_publies_TrieParCorps.html")
@@ -50,9 +50,12 @@ def get_pdf():
     Dict = {title: column for (title, column) in col}
     df = pd.DataFrame(Dict)
     df.head()
-    rslt_df = df.loc[(df['Section'] == 32) | (df['Section'] == 86)]
+    urls = list()
+    for header in headers:
+        rslt_df = df.loc[(df[header] == 32) | (df[header] == 86)]
+        urls.extend([url for url in rslt_df['Référence GALAXIE']])
 
-    return [url for url in rslt_df['Référence GALAXIE']]
+    return urls
 
 
 def download_new_pdf(urls):
