@@ -90,7 +90,7 @@ def send_email(urls):
     msg = EmailMessage()
     msg['Subject'] = "Offres Galaxies"
     msg['From'] = os.getenv("GMAIL_SENDER")
-    msg['To'] = os.getenv("GMAIL_RECEIVER")
+    msg['To'] = os.getenv("GMAIL_RECEIVER").replace("\"","")
     msg.set_content(message)
 
     s.send_message(msg)
